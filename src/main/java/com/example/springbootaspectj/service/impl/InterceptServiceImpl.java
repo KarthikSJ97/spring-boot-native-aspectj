@@ -15,6 +15,7 @@ public class InterceptServiceImpl implements InterceptService {
         log.info("Inside interceptNestedMethod()");
         Thread.sleep(2000);
         nestedMethod();
+        privateMethod();
     }
 
     @TrackTime
@@ -22,4 +23,11 @@ public class InterceptServiceImpl implements InterceptService {
         log.info("Inside nestedMethod()");
         Thread.sleep(3000);
     }
+
+    @TrackTime
+    private void privateMethod() throws InterruptedException {
+        log.info("Inside privateMethod()");
+        Thread.sleep(1000);
+    }
+
 }

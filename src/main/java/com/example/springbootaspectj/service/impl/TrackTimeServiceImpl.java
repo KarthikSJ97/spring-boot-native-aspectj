@@ -15,8 +15,9 @@ import java.lang.reflect.Method;
 public class TrackTimeServiceImpl implements TrackTimeService {
 
     public static final String NESTED_METHOD_NAME = "nestedMethod";
+    public static final String PRIVATE_METHOD_NAME = "privateMethod";
 
-    @Pointcut("execution(public * *(..))")
+    @Pointcut("execution(* *(..))")
     public void methodsToBeProfiled(){
 
     }
@@ -34,6 +35,7 @@ public class TrackTimeServiceImpl implements TrackTimeService {
         log.info("Execution time of {}(): {} ms", method.getName(), executionTime);
 
         isNestedMethodIntercepted(method);
+        isPrivateMethodIntercepted(method);
     }
 
     private void isNestedMethodIntercepted(Method method) {
@@ -41,4 +43,11 @@ public class TrackTimeServiceImpl implements TrackTimeService {
             log.info("Nested method intercepted successfully !!");
         }
     }
+
+    private void isPrivateMethodIntercepted(Method method) {
+        if(PRIVATE_METHOD_NAME.equals(method.getName())) {
+            log.info("Private method intercepted successfully !!");
+        }
+    }
+
 }
